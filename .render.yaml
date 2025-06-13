@@ -37,6 +37,16 @@ services:
         value: admin
       - key: WEBHOOK_URL
         value: https://n8n-yourname.onrender.com/
+      - key: N8N_RUNNERS_ENABLED
+        value: "true"
+      - key: N8N_RUNNERS_MODE
+        value: "internal"
+      - key: N8N_RUNNERS_MAX_CONCURRENCY
+        value: "5"
+      - key: N8N_RUNNERS_TASK_TIMEOUT
+        value: "60"
+      - key: N8N_RUNNERS_HEARTBEAT_INTERVAL
+        value: "30"
 
 databases:
   - name: n8n-db
