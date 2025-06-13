@@ -4,11 +4,11 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /healthz
+    healthCheckPath: /health
     autoDeploy: true
     envVars:
       - key: DB_TYPE
-        value: postgresdb
+        value: postgres
       - key: DB_POSTGRESDB_HOST
         fromDatabase:
           name: n8n-db
@@ -32,11 +32,11 @@ services:
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "true"
       - key: N8N_BASIC_AUTH_USER
-        value: admin
+        sync: false  # Set in Render dashboard for security
       - key: N8N_BASIC_AUTH_PASSWORD
-        value: admin
+        sync: false  # Set in Render dashboard for security
       - key: WEBHOOK_URL
-        value: https://n8n-yourname.onrender.com/
+        value: https://your-subdomain.onrender.com/  # Replace with your actual Render URL
       - key: N8N_RUNNERS_ENABLED
         value: "true"
       - key: N8N_RUNNERS_MODE
@@ -47,6 +47,8 @@ services:
         value: "60"
       - key: N8N_RUNNERS_HEARTBEAT_INTERVAL
         value: "30"
+      - key: N8N_RUNNERS_BROKER_LISTEN_ADDRESS
+        value: "0.0.0.0"
 
 databases:
   - name: n8n-db
