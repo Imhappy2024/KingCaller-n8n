@@ -8,7 +8,7 @@ services:
     autoDeploy: true
     envVars:
       - key: DB_TYPE
-        value: postgres
+        value: postgresdb  # Correct enum for Render
       - key: DB_POSTGRESDB_HOST
         fromDatabase:
           name: n8n-db
@@ -32,11 +32,11 @@ services:
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "true"
       - key: N8N_BASIC_AUTH_USER
-        sync: false  # Set in Render dashboard for security
+        sync: false  # Set this securely in Render Dashboard
       - key: N8N_BASIC_AUTH_PASSWORD
-        sync: false  # Set in Render dashboard for security
+        sync: false  # Set this securely in Render Dashboard
       - key: WEBHOOK_URL
-        value: https://your-subdomain.onrender.com/  # Replace with your actual Render URL
+        value: https://your-subdomain.onrender.com/  # Replace with actual Render URL
       - key: N8N_RUNNERS_ENABLED
         value: "true"
       - key: N8N_RUNNERS_MODE
@@ -49,7 +49,6 @@ services:
         value: "30"
       - key: N8N_RUNNERS_BROKER_LISTEN_ADDRESS
         value: "0.0.0.0"
-
 databases:
   - name: n8n-db
     plan: free
