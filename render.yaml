@@ -29,14 +29,14 @@ services:
         fromDatabase:
           name: n8n-db
           property: password
+      - key: DB_POSTGRESDB_SSL
+        value: "true"
 
-      # Required port bindings for Render
       - key: PORT
         value: "5678"
       - key: N8N_PORT
         value: "5678"
 
-      # Authentication (set actual credentials via Render dashboard)
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "true"
       - key: N8N_BASIC_AUTH_USER
@@ -44,15 +44,15 @@ services:
       - key: N8N_BASIC_AUTH_PASSWORD
         sync: false
 
-      # Webhook URL (update with your actual subdomain)
       - key: WEBHOOK_URL
-        value: https://your-subdomain.onrender.com/
+        value: https://n8n-rjhi.onrender.com
 
-      # Optional: encryption key for credentials and sessions (recommended)
       - key: N8N_ENCRYPTION_KEY
         sync: false
 
-      # Internal runners
+      - key: N8N_LOG_LEVEL
+        value: debug
+
       - key: N8N_RUNNERS_ENABLED
         value: "true"
       - key: N8N_RUNNERS_MODE
@@ -65,10 +65,6 @@ services:
         value: "30"
       - key: N8N_RUNNERS_BROKER_LISTEN_ADDRESS
         value: "0.0.0.0"
-
-      # Optional: timezone
-      - key: GENERIC_TIMEZONE
-        value: Asia/Manila
 
 databases:
   - name: n8n-db
