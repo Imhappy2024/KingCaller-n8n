@@ -8,7 +8,7 @@ services:
     autoDeploy: true
     envVars:
       - key: DB_TYPE
-        value: postgresdb  # Correct enum for Render
+        value: postgresdb
       - key: DB_POSTGRESDB_HOST
         fromDatabase:
           name: n8n-db
@@ -29,14 +29,30 @@ services:
         fromDatabase:
           name: n8n-db
           property: password
+
+      # Required port bindings for Render
+      - key: PORT
+        value: "5678"
+      - key: N8N_PORT
+        value: "5678"
+
+      # Authentication (set actual credentials via Render dashboard)
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "true"
       - key: N8N_BASIC_AUTH_USER
-        sync: false  # Set this securely in Render Dashboard
+        sync: false
       - key: N8N_BASIC_AUTH_PASSWORD
-        sync: false  # Set this securely in Render Dashboard
+        sync: false
+
+      # Webhook URL (update with your actual subdomain)
       - key: WEBHOOK_URL
-        value: https://your-subdomain.onrender.com/  # Replace with actual Render URL
+        value: https://your-subdomain.onrender.com/
+
+      # Optional: encryption key for credentials and sessions (recommended)
+      - key: N8N_ENCRYPTION_KEY
+        sync: false
+
+      # Internal runners
       - key: N8N_RUNNERS_ENABLED
         value: "true"
       - key: N8N_RUNNERS_MODE
@@ -49,6 +65,11 @@ services:
         value: "30"
       - key: N8N_RUNNERS_BROKER_LISTEN_ADDRESS
         value: "0.0.0.0"
+
+      # Optional: timezone
+      - key: GENERIC_TIMEZONE
+        value: Asia/Manila
+
 databases:
   - name: n8n-db
     plan: free
